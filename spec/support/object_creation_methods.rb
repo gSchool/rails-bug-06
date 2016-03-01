@@ -9,7 +9,7 @@ end
 
 def create_task(overrides = {})
   task = Task.new(overrides)
-  task.id = counter
+  task.task_list_id = counter
   task.save!
   task
 end

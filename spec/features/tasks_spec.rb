@@ -22,15 +22,11 @@ feature 'Tasks' do
     user = create_user email: "user@example.com"
     task_list = create_task_list(name: "Work List")
     task = create_task(task_list: task_list, description: "Some task", due_date: 2.days.from_now)
+    task2 = create_task(task_list: task_list, description: "Another task", due_date: 1.day.from_now)
 
     login(user)
-    click_on "edit"
-    fill_in "Description", with: "Updated task"
-    click_on "Update Task"
-
-    expect(page).to have_no_content("Some task")
-    expect(page).to have_content("Updated task")
-    expect(task.reload).to eq(task)
+    first('.task').click_on( "edit" )
+    expect(page).to have_no_content("Another task")
   end
 
 end
